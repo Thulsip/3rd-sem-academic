@@ -1,0 +1,74 @@
+[2:49 PM, 1/2/2024] tulasi: #include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+// Queue structure
+struct Queue {
+    int items[MAX_SIZE];
+    int front;
+    int rear;
+};
+
+// Function to initialize the queue
+void initializeQueue(struct Queue* queue) {
+    queue->front = -1;
+    queue->rear = -1;
+}
+
+// Function to check if the queue is empty
+int isEmpty(struct Queue* queue) {
+    return queue->front == -1;
+}
+
+// Function to check if the queue is full
+int isFull(struct Queue* queue) {
+    return (queue->rear + 1) % MAX_SIZE == queue->front;
+}
+
+// Function to enqueue (add) an item to the queue
+void enqueue(struct Queue* queue, int item) {
+    if (isFull(queue)) {
+        printf("Queue is full. Cannot enqueue more items.\n");
+        return;
+    }
+
+    // If the queue is empty, s…
+[2:49 PM, 1/2/2024] tulasi: #include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+// Stack structure
+struct Stack {
+    int items[MAX_SIZE];
+    int top;
+};
+
+// Function to initialize the stack
+void initializeStack(struct Stack* stack) {
+    stack->top = -1;
+}
+
+// Function to check if the stack is empty
+int isEmpty(struct Stack* stack) {
+    return stack->top == -1;
+}
+
+// Function to check if the stack is full
+int isFull(struct Stack* stack) {
+    return stack->top == MAX_SIZE - 1;
+}
+
+// Function to push an item onto the stack
+void push(struct Stack* stack, int item) {
+    if (isFull(stack)) {
+        printf("Stack overflow. Cannot push more items.\n");
+        return;
+    }
+
+    stack->items[++stack->top] = item;
+}
+
+// Function to pop an item from the stack
+int pop(struct Stac…
