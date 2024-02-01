@@ -1,0 +1,36 @@
+#load necessary libraries
+library(dplyr)
+#set seed for reproducibility
+set.seed(123)
+#generate sample data
+months<-c("Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec")
+revenue<-round(runif(12,min=800,max=1200),2)*1000#Random monthly revenue
+expenses<-round(runif(12,min=600,max=1000),2)*1000#Random monthly expenses
+#calculate profit for each month
+profit<-revenue-expenses
+#calculate profit after tax for each month(tax rate is30%)
+tax_rate<-0.30
+profit_after_tax<-profit*(1-tax_rate)
+profit_margin<-(profit_after_tax/revenue)*100
+mean_profit_after_tax<-mean(profit_after_tax)
+good_months<-months[profit_after_tax>mean_profit_after_tax]
+bad_months<-months[profit_after_tax<mean_profit_after_tax]
+best_month<-months[which.max(profit_after_tax)]
+worst_month<-months[which.min(profit_after_tax)]
+profit<-format(profit/1000,nsmall=2)
+profit_after_tax<-format(profit_after_tax/1000,nsmall=2)
+profit_margin<-format(profit_margin,nsmall=0)
+results<-data.frame(
+  Months=months,
+  profit=paste("$",profit),
+  profit_after_tax=paste("$",profit_after_tax),
+  profit_margin=paste(profit_margin,"%"),
+  good_months=paste(good_months,collapse=","),
+  bad_months=paste(bad_months,collapse=","),
+  best_months=best_month,
+  worst_month=worst_month
+)
+write.csv(results,files="F:/financial_metrics_results.cvs",row.names=FALSE)
+print(results)
+
+  
